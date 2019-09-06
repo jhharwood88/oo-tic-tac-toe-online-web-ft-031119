@@ -26,11 +26,10 @@ class TicTacToe
 	end
 
 	def input_to_index(input)
-		@int_input = input.to_i
-		@convert_to_array_pos = @int_input -1
+		input.to_i-1
 	end
 
-	def move(pos,mark)
+	def move(pos,mark = "X")
 		@board[pos] = mark
 	end
 
@@ -38,35 +37,39 @@ class TicTacToe
 		@board[pos] != " "
 	end
 
-	def valid_move?(pos)
-		if @board[pos] == " "
+	def valid_move?(pos)	
+		if @board[pos] == " " && pos >= 0&& pos <= 8
 			true
 		else
 			false
 		end
 	end
 
-	def current_player
-	    turn_count % 2 == 0 ? "X" : "O"
-	end
-	 
-	def turn_count
+	def turn_count		
 	    @board.count{|token| token == "X" || token == "O"}
 	end
 
-	def turn
-		puts "Please enter 1-9 to select a space"
-		@turn = gets.strip
-		@int_turn = input_to_index(@turn)
-			if valid_move?(@int_turn)
-				move(@int_turn, current_player)
-
-				display_board
-				byebug
-			else
-				
-			end	
+	def current_player
+	   turn_count % 2 == 0 ? 'X' : 'O'
 	end
+	 
+
+	def turn
+		user_input = input_to_index(gets.chomp)
+			if valid_move?(user_input)
+
+				move(user_input, current_player)
+			else
+				turn
+			end	
+		display_board
+	end
+
+	def won?
+
+	end
+
+
 
 
 end
