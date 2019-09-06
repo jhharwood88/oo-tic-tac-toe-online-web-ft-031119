@@ -60,8 +60,9 @@ class TicTacToe
 		@int_turn = input_to_index(@turn)
 			if valid_move?(@int_turn)
 				move(@int_turn, current_player)
-				
+
 				display_board
+				byebug
 			else
 				
 			end	
